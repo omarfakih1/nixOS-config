@@ -46,10 +46,12 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Desktop Environment.
+  # Enable the Desktop Environment.
   services.xserver.displayManager.gdm.enable = false;
   services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  programs.hyprland.enable = true;
+
+  # services.desktopManager.plasma6.enable = true;
 
   # services.xserver.desktopManager.gnome.enable = true;
 

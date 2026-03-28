@@ -16,6 +16,9 @@ environment.systemPackages = with pkgs; [
 
 		#System
 		pkgs.home-manager
+		
+		#System UI/Plugins
+		pkgs.kitty # required for the default Hyprland config
 
 	];
 }
