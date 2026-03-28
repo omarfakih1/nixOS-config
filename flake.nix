@@ -7,7 +7,7 @@
     zed.url = "github:zed-industries/zed";
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
