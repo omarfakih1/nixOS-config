@@ -14,5 +14,8 @@ environment.systemPackages = with pkgs; [
 		inputs.zen-browser.packages."${system}".default # beta
 		inputs.helium.packages.${system}.default
 
+		#System
+		pkgs.home-manager
+
 	];
 }
