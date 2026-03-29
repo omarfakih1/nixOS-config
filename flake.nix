@@ -1,50 +1,52 @@
 {
   description = "my nixos config";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zed.url = "github:zed-industries/zed";
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
+    zen-browser.url = "github:youwen5/zen-browser-flake";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vicinae.url = "github:vicinaehq/vicinae";
   };
-  outputs = { self, nixpkgs, nixpkgs-unstable, zen-browser, zed, helium, home-manager, ... }:
-  let
-    system = "x86_64-linux";
+
+    outputs = { self, nixpkgs, nixpkgs-unstable, zed, helium, zen-browser, home-manager, vicinae, ... }:
+      let
+      system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
     unstablePkgs = import nixpkgs-unstable { inherit system; };
-  in {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit zen-browser;
-          inherit zed;
-          inherit helium;
-          unstablePkgs = unstablePkgs;
+    in {
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit zed;
+            inherit helium;
+            inherit vicinae;
+            inherit zen-browser;
+            unstablePkgs = unstablePkgs;
+          };
+          modules = [
+            ./configuration.nix
+              ./hardware-configuration.nix
+              ./packages.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.omarf = import ./home.nix;
+              }
+          ];
         };
-        modules = [
-          ./configuration.nix
-          ./hardware-configuration.nix
-          ./packages.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.omarf = import ./home.nix;
-          }
-        ];
+      };
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [ git neovim zsh ];
+        shellHook = ''
+          echo "Welcome to your dev shell"
+          '';
       };
     };
-    devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs; [ git neovim zsh ];
-      shellHook = ''
-        echo "Welcome to your dev shell"
-      '';
-    };
-  };
 }
-

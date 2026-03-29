@@ -47,8 +47,8 @@
   services.xserver.enable = true;
 
   # Enable the Desktop Environment.
-  services.xserver.displayManager.gdm.enable = false;
-  services.displayManager.sddm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.sddm.enable = false;
   programs.hyprland.enable = true;
 
   # services.desktopManager.plasma6.enable = true;
