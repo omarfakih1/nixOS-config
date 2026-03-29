@@ -9,6 +9,7 @@ environment.systemPackages = with pkgs; [
 		gh
 		inputs.zed.packages."${system}".default # beta
 		fastfetch
+    neofetch
 		neovim
 		gcc
 		fzf
@@ -24,13 +25,16 @@ environment.systemPackages = with pkgs; [
 		home-manager
 		hyprpaper
 		inputs.vicinae.packages.${system}.default
-		waybar
-		wlogout
 		kdePackages.dolphin
     openrgb
-		
+    grimblast
+    libnotify
+    wget
+
 		#System UI/Plugins
 		kitty # required for the default Hyprland config
+    waybar
+    wlogout
 
 	];
 }
