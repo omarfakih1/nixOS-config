@@ -147,6 +147,13 @@
 #OpenRGB Helper
   services.udev.extraRules = (builtins.readFile "${pkgs.openrgb}/lib/udev/rules.d/60-openrgb.rules");
 
+#Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
 # zsh
   programs.zsh.enable = true;
@@ -193,7 +200,11 @@
   };
 
 
+# Flatpak 
+services.flatpak.enable = true;
 
+# Fix slow download speeds steam
+services.resolved.enable = true;
 
 
 

@@ -30,11 +30,13 @@ environment.systemPackages = with pkgs; [
     grimblast
     libnotify
     wget
+    hyprshot
 
 		#System UI/Plugins
-		kitty # required for the default Hyprland config
+		kitty
     waybar
+    swaynotificationcenter
     wlogout
-
+    kdePackages.breeze-icons
 	];
 }
