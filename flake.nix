@@ -6,6 +6,7 @@
     zed.url = "github:zed-industries/zed";
     helium.url = "github:schembriaiden/helium-browser-nix-flake";
     zen-browser.url = "github:youwen5/zen-browser-flake";
+    snappy-switcher.url = "github:OpalAayan/snappy-switcher";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +14,7 @@
     vicinae.url = "github:vicinaehq/vicinae";
   };
 
-    outputs = { self, nixpkgs, nixpkgs-unstable, zed, helium, zen-browser, home-manager, vicinae, ... }:
+    outputs = { self, nixpkgs, nixpkgs-unstable, zed, helium, zen-browser, home-manager, vicinae, snappy-switcher, ... }:
       let
       system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
@@ -23,6 +24,7 @@
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
+            inherit snappy-switcher;
             inherit zed;
             inherit helium;
             inherit vicinae;

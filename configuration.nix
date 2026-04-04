@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
       ./packages.nix
+      ./pixie-sddm.nix
     ];
 
 # Bootloader.
@@ -48,7 +49,10 @@
 
 # Enable the Desktop Environment.
   services.xserver.displayManager.gdm.enable = false;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+      enable = true;
+      theme = "pixie";
+    };
   programs.hyprland.enable = true;
 
 # services.desktopManager.plasma6.enable = true;
